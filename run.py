@@ -8,6 +8,22 @@ easy_mode = 1
 medium_mode = 2
 hard_mode = 3
 board_sizes = {easy_mode: 7, medium_mode: 9, hard_mode: 12}
+boatsz = {"Destroyer": 2, "Cruiser": 3, "Battleship": 4, "Aircraft Carrier": 5}
+rulez = input("Do you want to see the rules? (y/n)".lower())
+if rulez == "y":
+    print("The goal of the game is to sink all of your opponent's ships before they sink yours.")
+
+    print("The ships are of different sizes and are placed horizontally or vertically on the board.")
+
+    print("Players take turns to guess the location of their opponent's ships by calling out a coordinate (e.g.D7)")
+
+    print("If the guess is a hit, the player marks that location on their opponent's board with a marker to indicate a hit.")
+
+    print("If the guess is a miss, the player marks that location with a marker to indicate a miss.")
+
+    print("The game continues until all ships of one player have been sunk, and the other player is declared the winner.")
+
+print("lets gooooooooooo")
 
 # Set up game board
 print("Select your difficulty level")
