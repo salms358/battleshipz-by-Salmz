@@ -8,6 +8,7 @@ easy_mode = 1
 medium_mode = 2
 hard_mode = 3
 board_sizes = {easy_mode: 7, medium_mode: 9, hard_mode: 12}
+comp_board = [['O' for x in range(10)] for y in range(10)]
 boatsz = {"Destroyer": 2, "Cruiser": 3, "Battleship": 4, "Aircraft Carrier": 5}
 rulez = input("Do you want to see the rules? (y/n)".lower())
 if rulez == "y":
@@ -39,6 +40,17 @@ for i in range(board_size):
 
 print(f"Board size: {board_size}x{board_size}")
 
+
+
+def computer_board():
+    comp_board = []
+    for i in range(board_size):
+        row = ["O"] * board_size
+        comp_board.append(row)
+    return comp_board
+
+
+
 # Place ships randomly
 for i in range(NUMBER_SHIPS):
     ship_row = random.randint(0, board_size - 1)
@@ -54,7 +66,8 @@ for i in range(NUMBER_SHIPS):
         if ship_col + j < board_size:
             board[ship_row][ship_col + j] = "S"
         else:
-            board[ship_row + 1][ship_col - (board_size - j)] = "S"
+            jls_extract_var = ship_col
+            board[ship_row + 1][jls_extract_var - (board_size - j)] = "S"
 
 # Play the game
 num_guesses = 0
@@ -78,6 +91,11 @@ while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses < board_size ** 2:
         board[guess_row][guess_col] = "X"
 
     num_guesses += 1
+
+    print("Computer board: ")
+    computer_board()
+
+
 
 # End the game
 print("Game over!")
