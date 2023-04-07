@@ -56,6 +56,19 @@ for i in range(NUMBER_SHIPS):
     ship_row = random.randint(0, board_size - 1)
     ship_col = random.randint(0, board_size - 1)
 
+
+comp_ship_placement = []
+for i in range(SHIP_SIZES):
+    row = random.randint(0, SHIP_SIZES - 1)
+    col = random.randint(0, SHIP_SIZES- 1)
+    comp_ship_placement.append((row, col))
+
+
+
+
+
+
+
     # Ensure the ship does not overlap with another ship
     while board[ship_row][ship_col] == "S":
         ship_row = random.randint(0, board_size - 1)
@@ -72,6 +85,8 @@ for i in range(NUMBER_SHIPS):
 # Play the game
 num_guesses = 0
 num_hits = 0
+comp_hits = 0
+comp_misses = 0
 while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses < board_size ** 2:
     # Print the game board
     for row in board:
@@ -94,6 +109,8 @@ while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses < board_size ** 2:
 
     print("Computer board: ")
     computer_board()
+ row_comp = random.randint(0, BOARD_SIZE-1)
+  col_comp = random.randint(0, BOARD_SIZE-1)
 
 
 
