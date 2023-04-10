@@ -10,6 +10,18 @@ hard_mode = 3
 board_sizes = {easy_mode: 7, medium_mode: 9, hard_mode: 12}
 comp_board = [['O' for x in range(10)] for y in range(10)]
 boatsz = {"Destroyer": 2, "Cruiser": 3, "Battleship": 4, "Aircraft Carrier": 5}
+print(r"""
+   __    __    __
+                             |==|  |==|  |==|
+                           __|__|__|__|__|__|_
+                        __|___________________|___
+                     __|__[]__[]__[]__[]__[]__[]__|___
+                    |............................o.../
+                    \.............................../
+               hjw_,~')_,~')_,~')_,~')_,~')_,~')_,~')/,~')_
+""")
+print("Welcome! :)")
+
 
 def rules():
     """ method to show the rules """
@@ -45,57 +57,62 @@ def rules():
             print("Invalid input")
             difficulties = input("Enter desired difficulty")
             board_size = board_sizes.get(int(difficulties))
+            set_diff()
+            player_board = dual_boards()
+            comp_board = dual_boards()
+            print_boards(player_board, comp_board)
 
+    def dual_boards():
+        board = []
+        for i in range(board_size):
+            row = ["O"] * board_size
+            board.append(row)
+            
+        print(f"Board size: {board_size}x{board_size}")
 
-board = []
-for i in range(board_size):
-    row = ["O"] * board_size
-    board.append(row)
+        comp_board = []
+        for i in range(board_size):
+            row = ["O"] * board_size
+            comp_board.append(row)
+            return comp_board
 
-print(f"Board size: {board_size}x{board_size}")
-
-
-def computer_board():
-
-    comp_board = []
-    for i in range(board_size):
-        row = ["O"] * board_size
-        comp_board.append(row)
-        return comp_board
-
-def print_boards():
-    """
-    Print both sets of boards
-    """
-    print("Players Board:")
-    board = []
-    print(" ")
-    print("Computers Board:")
-    computer_board()
+    def print_boards(player_board, comp_board):
+        """
+        Print both sets of boards
+        """
+        print("Player board:")
+        for row in player_board:
+            print(" ".join(row))
+            print("\nComputer board:")
+            for row in comp_board:
+                print(" ".join(row))
+    
+    dual_boards()
 
 
 
 # Place ships randomly
-for i in range(NUMBER_SHIPS):
-    ship_row = random.randint(0, board_size - 1)
-    ship_col = random.randint(0, board_size - 1)
-
- # Ensure the ship does not overlap with another ship
-    while board[ship_row][ship_col] == "S":
+    for i in range(NUMBER_SHIPS):
         ship_row = random.randint(0, board_size - 1)
         ship_col = random.randint(0, board_size - 1)
 
-    # Place the ship
-    for j in range(SHIP_SIZES):
-        if ship_col + j < board_size:
-            board[ship_row][ship_col + j] = "S"
-        else:
-            board[ship_row] + 1
-comp_ship_placement = []
-for i in range(SHIP_SIZES):
-    row = random.randint(0, SHIP_SIZES - 1)
-    col = random.randint(0, SHIP_SIZES- 1)
-    comp_ship_placement.append((row, col))
+    # Ensure the ship does not overlap with another ship
+        while board[ship_row][ship_col] == "S":
+            ship_row = random.randint(0, board_size - 1)
+            ship_col = random.randint(0, board_size - 1)
+
+        # Place the ship
+        for j in range(SHIP_SIZES):
+            if ship_col + j < board_size:
+                board[ship_row][ship_col + j] = "S"
+            else:
+                board[ship_row] + 1
+    comp_ship_placement = []
+    for i in range(SHIP_SIZES):
+        row = random.randint(0, SHIP_SIZES - 1)
+        col = random.randint(0, SHIP_SIZES- 1)
+        comp_ship_placement.append((row, col))
+
 
 def game():
     """gameplay"""
@@ -129,15 +146,15 @@ def game():
         #computer_board()
         row_comp = random.randint(0, board_size-1)
         col_comp = random.randint(0, board_size-1)
-
-        if (row_comp, col_comp) in comp_ship_placement:
-            print("The computer hit your ship!")
-            board[row_comp][col_comp] = "X"
-            num_hits -= 1
-        else:
-            print("The computer missed your ship lucky!")
-            board[row_comp][col_comp] = "."
-            comp_misses += 1
+        def print_scores():
+            if (row_comp, col_comp) in comp_ship_placement:
+                print("The computer hit your ship!")
+                board[row_comp][col_comp] = "X"
+                num_hits -= 1
+            else:
+                print("The computer missed your ship lucky!")
+                board[row_comp][col_comp] = "."
+                comp_misses += 1
 
 
 
