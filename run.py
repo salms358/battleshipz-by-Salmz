@@ -22,7 +22,8 @@ print(r"""
 """)
 print("Welcome! :)")
 
-
+# game Not running after printing the ship
+#Errors with board_size function stating that it is not defined
 def rules():
     """ method to show the rules """
     rulez = input("Do you want to see the rules? (y/n)")
@@ -56,7 +57,7 @@ def rules():
         while difficulties not in ["1","2","3"]:
             print("Invalid input")
             difficulties = input("Enter desired difficulty")
-            board_size = board_sizes.get(int(difficulties))
+            
             set_diff()
             player_board = dual_boards()
             comp_board = dual_boards()
@@ -83,9 +84,10 @@ def rules():
         print("Player board:")
         for row in player_board:
             print(" ".join(row))
-            print("\nComputer board:")
+            print("Computer board:")
             for row in comp_board:
-                print(" ".join(row))
+                #
+                print(" ".join(["O" if cell == "S" and hit else cell for cell, hit in row]))
     
     dual_boards()
 
@@ -160,7 +162,7 @@ def game():
 
     # End the game
     print("Game over!")
-    for row in board:
+    for row in board_:
         print(" ".join(row))
 
     print("Number of guesses:", num_guesses)
