@@ -176,17 +176,17 @@ def game(board_size: int, comp_board, player_board):
 
 
 # Make sure the guess hasn't already been made
-while player_board[comp_row][comp_col] != " ":
-    comp_row = random.randint(0, board_size - 1)
-    comp_col = random.randint(0, board_size - 1)
-    # computers turn
-    if player_board[comp_row][comp_col] == "S":
-        print("Computer hit your ship")
-        player_board[comp_row][comp_col] == "X"
-        num_hits -= 1
-    else:
-        print("computer misses your ships haha")
-        player_board[comp_row][comp_col] = "M"
+    while player_board[comp_row][comp_col] != " ":
+        comp_row = random.randint(0, board_size - 1)
+        comp_col = random.randint(0, board_size - 1)
+        # computers turn
+        if player_board[comp_row][comp_col] == "S":
+            print("Computer hit your ship")
+            player_board[comp_row][comp_col] == "X"
+            num_hits -= 1
+        else:
+            print("computer misses your ships haha")
+            player_board[comp_row][comp_col] = "M"
 
 
 def print_scores():
