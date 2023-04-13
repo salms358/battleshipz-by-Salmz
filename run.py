@@ -1,51 +1,4 @@
-import random
-
-
-# Should print out ASCII art as a welcome page
-def welcome():
-    """Ascii art of ship"""
-    print(
-        r"""
-   __    __    __
-                             |==|  |==|  |==|
-                           __|__|__|__|__|__|_
-                        __|___________________|___
-                     __|__[]__[]__[]__[]__[]__[]__|___
-                    |............................o.../
-                    \.............................../
-               hjw_,~')_,~')_,~')_,~')_,~')_,~')_,~')/,~')_
-               """
-    )
-    print("Welcome to the battleships game! :)")
-
-
-# If the user wants to see the rules incase its their first time or theyneed
-# a reminder they can ask for the rules to be printed onto the console
-def rules():
-    """method to show the rules"""
-    rulez = input("Do you want to see the rules? (y/n) ")
-    while rulez.lower() not in ["y", "n"]:
-        print("invalid input")
-        rulez = input("Do you want to see the rules? (y/n) ")
-    if rulez == "y":
-        print()
-        print("The goal of the game is to sink all of your opponent's ships")
-        print("before they sink yours.")
-        print("The ships are of different sizes and are placed")
-        print("horizontally or vertically on the board.")
-        print("Players take turns to guess the location of their opponent's")
-        print("ships by calling out a coordinate (e.g.D7)")
-        print("If the guess is a hit, the player marks that location on their")
-        print("opponent's board with a marker to indicate a hit.")
-        print("If the guess is a miss, the player marks that location with a ")
-        print("marker to indicate a miss.")
-        print("The game continues until all ships of one player have been sunk ")
-        print("and the other player is declared the winner.")
-        print()
-
-    print("lets gooooooooooo!")
-    print()
-
+from random import randint
 
 def set_diff():
     """setting difficulty"""
@@ -120,7 +73,7 @@ def ships(board_size: int, player_board, comp_board):
     return player_board, comp_board
 
 
-def game(board_size: int, comp_board, player_board):
+def game(board_size: int, player_board, comp_board):
     """
     Gameplay loop method
     """
@@ -129,6 +82,7 @@ def game(board_size: int, comp_board, player_board):
     num_hits = 0
     comp_hits = 0
     comp_misses = 0
+    comp_guess = []
     # while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses and comp_hits < board_size ** 2:
     while num_guesses > 0:
         # Print game boards
@@ -173,20 +127,14 @@ def game(board_size: int, comp_board, player_board):
 
         comp_row = random.randint(0, board_size - 1)
         comp_col = random.randint(0, board_size - 1)
-
-
-# Make sure the guess hasn't already been made
-    while player_board[comp_row][comp_col] != " ":
-        comp_row = random.randint(0, board_size - 1)
-        comp_col = random.randint(0, board_size - 1)
-        # computers turn
-        if player_board[comp_row][comp_col] == "S":
-            print("Computer hit your ship")
-            player_board[comp_row][comp_col] == "X"
-            num_hits -= 1
+    while True:
+        comp_guess_col = randint(0, len(player_board) - 1)
+        comp_guess_row = randint(0, len(player_board) - 1)
+        if [cpu_guess_row, cpu_guess_col] in comp_guess:
+            continue
         else:
-            print("computer misses your ships haha")
-            player_board[comp_row][comp_col] = "M"
+            comp_guess.append([cpu_guess_row, cpu_guess_col])
+            break
 
 
 def print_scores():
@@ -227,5 +175,5 @@ if __name__ == "__main__":
         player_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board, comp_board = ships(board_size, player_board, comp_board)
 
-        game(board_size, comp_board)
+        game(board_size, comp_board, player_board)
         break
