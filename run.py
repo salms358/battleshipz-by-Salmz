@@ -1,4 +1,47 @@
 from random import randint
+# Should print out ASCII art as a welcome page
+def welcome():
+    """Ascii art of ship"""
+    print(r"""
+   __    __    __
+                             |==|  |==|  |==|
+                           __|__|__|__|__|__|_
+                        __|___________________|___
+                     __|__[]__[]__[]__[]__[]__[]__|___
+                    |............................o.../
+                    \.............................../
+               hjw_,~')_,~')_,~')_,~')_,~')_,~')_,~')/,~')_
+               """)
+    print("Welcome to the battleships game! :)")
+
+
+
+# If the user wants to see the rules incase its their first time or theyneed 
+# a reminder they can ask for the rules to be printed onto the console
+def rules():
+    """ method to show the rules """
+    rulez = input("Do you want to see the rules? (y/n) ")
+    while rulez.lower() not in ["y", "n"]:
+        print("invalid input")
+        rulez = input("Do you want to see the rules? (y/n) ")
+    if rulez == "y":
+        print()
+        print("The goal of the game is to sink all of your opponent's ships")
+        print("before they sink yours.")
+        print("The ships are of different sizes and are placed")
+        print("horizontally or vertically on the board.")
+        print("Players take turns to guess the location of their opponent's")
+        print("ships by calling out a coordinate (e.g.D7)")
+        print("If the guess is a hit, the player marks that location on their")
+        print("opponent's board with a marker to indicate a hit.")
+        print("If the guess is a miss, the player marks that location with a ")
+        print("marker to indicate a miss.")
+        print("The game continues until all ships of one player have been sunk ")
+        print("and the other player is declared the winner.")
+        print()
+
+    print("lets gooooooooooo!")
+    print()
 
 def set_diff():
     """setting difficulty"""
