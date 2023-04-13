@@ -4,7 +4,8 @@ import random
 # Should print out ASCII art as a welcome page
 def welcome():
     """Ascii art of ship"""
-    print(r"""
+    print(
+        r"""
    __    __    __
                              |==|  |==|  |==|
                            __|__|__|__|__|__|_
@@ -13,15 +14,15 @@ def welcome():
                     |............................o.../
                     \.............................../
                hjw_,~')_,~')_,~')_,~')_,~')_,~')_,~')/,~')_
-               """)
+               """
+    )
     print("Welcome to the battleships game! :)")
 
 
-
-# If the user wants to see the rules incase its their first time or theyneed 
+# If the user wants to see the rules incase its their first time or theyneed
 # a reminder they can ask for the rules to be printed onto the console
 def rules():
-    """ method to show the rules """
+    """method to show the rules"""
     rulez = input("Do you want to see the rules? (y/n) ")
     while rulez.lower() not in ["y", "n"]:
         print("invalid input")
@@ -68,8 +69,7 @@ def dual_boards():
         row = ["O"] * board_size
         board.append(row)
 
-    print(
-        f"Board size: {board_size}x{board_size}")
+    print(f"Board size: {board_size}x{board_size}")
     comp_board = []
     for i in range(board_size):
         row = ["O"] * board_size
@@ -120,7 +120,7 @@ def ships(board_size: int, player_board, comp_board):
     return player_board, comp_board
 
 
-def game(board_size: int, comp_board):
+def game(board_size: int, comp_board, player_board):
     """
     Gameplay loop method
     """
@@ -171,6 +171,23 @@ def game(board_size: int, comp_board):
         # row_comp = random.randint(0, board_sizes[difficulties]-1)
         # col_comp = random.randint(0, board_sizes[difficulties]-1)
 
+        comp_row = random.randint(0, board_size - 1)
+        comp_col = random.randint(0, board_size - 1)
+
+
+# Make sure the guess hasn't already been made
+while player_board[comp_row][comp_col] != " ":
+    comp_row = random.randint(0, board_size - 1)
+    comp_col = random.randint(0, board_size - 1)
+    # computers turn
+    if player_board[comp_row][comp_col] == "S":
+        print("Computer hit your ship")
+        player_board[comp_row][comp_col] == "X"
+        num_hits -= 1
+    else:
+        print("computer misses your ships haha")
+        player_board[comp_row][comp_col] = "M"
+
 
 def print_scores():
     """
@@ -206,8 +223,8 @@ if __name__ == "__main__":
         difficulties = set_diff()
 
         board_size = board_sizes[difficulties]
-        comp_board = [['O' for x in range(board_size)] for y in range(board_size)]
-        player_board = [['O' for x in range(board_size)] for y in range(board_size)]
+        comp_board = [["O" for x in range(board_size)] for y in range(board_size)]
+        player_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board, comp_board = ships(board_size, player_board, comp_board)
 
         game(board_size, comp_board)
