@@ -91,7 +91,7 @@ def print_board(player_board, comp_board):
 
     for row in comp_board:
         print(" ".join(row))
-    print()
+    print()  
 
 
 def ships(board_size: int, player_board, comp_board):
@@ -135,6 +135,7 @@ def computer_guess(player_board):
             break
     comp_guesses.append([guess_row, guess_col])
 
+
 def game(board_size: int, player_board, comp_board):
     """
     Gameplay loop method
@@ -145,48 +146,65 @@ def game(board_size: int, player_board, comp_board):
     comp_hits = 0
     comp_misses = 0
     comp_guess = 0
+
     # while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses and comp_hits < board_size ** 2:
+    
     while num_guesses > 0:
         # Print game boards
         print_board(player_board, comp_board)
+        num_guesses = 8
+        if num_guesses < 8:
+            if num_guesses == 8:
+                print("Too many incorrect guesses")
+                print("Turn: " + str(guess + 1))
 
         # Get user input
         try:
             guess_row = int(input("Guess row: "))
             guess_col = int(input("Guess col: "))
             if guess_row <= board_size and guess_row > 0:
-                # Do nothing
                 pass
             else:
                 raise "Number is out of bounds"
             if guess_col <= board_size and guess_col > 0:
-                # Do nothing
                 pass
             else:
                 raise "Number is out of bounds"
         except ValueError:
             print("Invalid input")
             continue
-
-        # Check if the guess is a hit or a miss
         if comp_board[guess_row][guess_col] == "S":
             print("Hit!")
             comp_board[guess_row][guess_col] = "X"
             num_hits += 1
+            row = randint(0, len(player_board) - 1)
+            col = randint(0, len(player_board) - 1)
+
+            if player_board[row][col] == "X":
+                print("The computer hit your ship at row", row, "column", col, "!")
+                player_board[row][col] = "H"
+                comp_hits += 1
+            else:
+                print("The computer missed at row", row, "column", col, ".")
+                player_board[row][col] = "M"
         else:
             print("Miss!")
             comp_board[guess_row][guess_col] = "M"
-            num_guesses -= 1       
-            
+            num_guesses -= 1
+           
             row = randint(0, len(player_board) - 1)
-            col = randint(0,len(player_board) - 1)
-            if player_board[row][col] == 'X':
+            col = randint(0, len(player_board) - 1)
+
+
+            if player_board[row][col] == "X":
                 print("The computer hit your ship at row", row, "column", col, "!")
-                player_board[row][col] = 'C'
+                player_board[row][col] = "H"
+                comp_hits += 1
             else:
                 print("The computer missed at row", row, "column", col, ".")
-                player_board[row][col] = 'O'
-       
+                player_board[row][col] = "M"
+
+
 def print_scores():
     """
     Method to print user score
@@ -201,12 +219,7 @@ def print_scores():
         comp_misses += 1
 
     # End the game
-    print("Game over!")
-    for row in player_board:
-        print(" ".join(row))
 
-    print("Number of guesses:", num_guesses)
-    print("Number of hits:", num_hits)
 
 
 if __name__ == "__main__":
@@ -222,11 +235,13 @@ if __name__ == "__main__":
         rules()
         difficulties = set_diff()
         board_size = board_sizes[difficulties]
-
+        # hidden_comp_board = 
         comp_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board, comp_board = ships(board_size, player_board, comp_board)
-
         game(board_size, comp_board, player_board)
         break
+
+
+
 

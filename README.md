@@ -1,31 +1,26 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+#  Battleships By Salmz
 
-Welcome salms358,
+## Introduction 
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+Welcome to my Battleships game. Its a very basic variation of the classic Battleships game. 
+The aim of the game is to sink of the computers ships.
 
-## Reminders
+A live version of the game can be found here []
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+# Strategy 
+## Project Goals
+The main aim of the game is to have fun whilst improving the users strategy skills.In this game the user will play against a computer.
 
-## Creating the Heroku app
+## User Goals
+First time players:
+- I want to be told the rules if i am not sure of how to play.
+- I want the game to be engaging.Im going to see if i can beat the computer first time.
+- I want the game to be easy to navigate around.
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Frequent time user:
+- I enjoy playing the game but sometimes i wish the columns were not so squished together.
 
-1. `heroku/python`
-2. `heroku/nodejs`
+# Structure
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+# How to play
+Battleship is a 2 player game  
