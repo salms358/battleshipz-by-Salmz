@@ -1,8 +1,13 @@
 from random import randint
+
+random_number = randint(0, 10)
+
+
 # Should print out ASCII art as a welcome page
 def welcome():
     """Ascii art of ship"""
-    print(r"""
+    print(
+        r"""
    __    __    __
                              |==|  |==|  |==|
                            __|__|__|__|__|__|_
@@ -11,15 +16,15 @@ def welcome():
                     |............................o.../
                     \.............................../
                hjw_,~')_,~')_,~')_,~')_,~')_,~')_,~')/,~')_
-               """)
+               """
+    )
     print("Welcome to the battleships game! :)")
 
 
-
-# If the user wants to see the rules incase its their first time or theyneed 
+# If the user wants to see the rules incase its their first time or theyneed
 # a reminder they can ask for the rules to be printed onto the console
 def rules():
-    """ method to show the rules """
+    """method to show the rules"""
     rulez = input("Do you want to see the rules? (y/n) ")
     while rulez.lower() not in ["y", "n"]:
         print("invalid input")
@@ -42,6 +47,7 @@ def rules():
 
     print("lets gooooooooooo!")
     print()
+
 
 def set_diff():
     """setting difficulty"""
@@ -82,6 +88,7 @@ def print_board(player_board, comp_board):
     print()
 
     print("Computer board:")
+
     for row in comp_board:
         print(" ".join(row))
     print()
@@ -92,29 +99,41 @@ def ships(board_size: int, player_board, comp_board):
     Place ships randomly
     """
     for i in range(NUMBER_SHIPS):
-        ship_row = random.randint(0, board_size - 1)
-        ship_col = random.randint(0, board_size - 1)
+        ship_row = randint(0, board_size - 1)
+        ship_col = randint(0, board_size - 1)
 
         # Ensure the ship does not overlap with another ship
         while player_board[ship_row][ship_col] == "S":
-            ship_row = random.randint(0, board_size - 1)
-            ship_col = random.randint(0, board_size - 1)
+            ship_row = randint(0, board_size - 1)
+            ship_col = randint(0, board_size - 1)
 
         player_board[ship_row][ship_col] = "S"
 
     for i in range(NUMBER_SHIPS):
-        ship_row = random.randint(0, board_size - 1)
-        ship_col = random.randint(0, board_size - 1)
+        ship_row = randint(0, board_size - 1)
+        ship_col = randint(0, board_size - 1)
 
         # Ensure the ship does not overlap with another ship
         while player_board[ship_row][ship_col] == "S":
-            ship_row = random.randint(0, board_size - 1)
-            ship_col = random.randint(0, board_size - 1)
+            ship_row = randint(0, board_size - 1)
+            ship_col = randint(0, board_size - 1)
 
         comp_board[ship_row][ship_col] = "S"
 
     return player_board, comp_board
 
+
+# Computers turn
+def computer_guess(player_board):
+    global board_size
+    while True:
+        guess_row = randint(0, board_size - 1)
+        guess_col = randint(0, board_size - 1)
+        # See if the computer guessed these positions before,
+        # if not then it can try out these positions
+        if [guess_row, guess_col] not in comp_guess:
+            break
+    comp_guesses.append([guess_row, guess_col])
 
 def game(board_size: int, player_board, comp_board):
     """
@@ -125,7 +144,7 @@ def game(board_size: int, player_board, comp_board):
     num_hits = 0
     comp_hits = 0
     comp_misses = 0
-    comp_guess = []
+    comp_guess = 0
     # while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses and comp_hits < board_size ** 2:
     while num_guesses > 0:
         # Print game boards
@@ -149,9 +168,6 @@ def game(board_size: int, player_board, comp_board):
             print("Invalid input")
             continue
 
-        guess_row = guess_row - 1
-        guess_col = guess_col - 1
-
         # Check if the guess is a hit or a miss
         if comp_board[guess_row][guess_col] == "S":
             print("Hit!")
@@ -160,26 +176,17 @@ def game(board_size: int, player_board, comp_board):
         else:
             print("Miss!")
             comp_board[guess_row][guess_col] = "M"
-
-        num_guesses -= 1
-
-        # print("Computer board: ")
-        # computer_board()
-        # row_comp = random.randint(0, board_sizes[difficulties]-1)
-        # col_comp = random.randint(0, board_sizes[difficulties]-1)
-
-        comp_row = random.randint(0, board_size - 1)
-        comp_col = random.randint(0, board_size - 1)
-    while True:
-        comp_guess_col = randint(0, len(player_board) - 1)
-        comp_guess_row = randint(0, len(player_board) - 1)
-        if [cpu_guess_row, cpu_guess_col] in comp_guess:
-            continue
-        else:
-            comp_guess.append([cpu_guess_row, cpu_guess_col])
-            break
-
-
+            num_guesses -= 1       
+            
+            row = randint(0, len(player_board) - 1)
+            col = randint(0,len(player_board) - 1)
+            if player_board[row][col] == 'X':
+                print("The computer hit your ship at row", row, "column", col, "!")
+                player_board[row][col] = 'C'
+            else:
+                print("The computer missed at row", row, "column", col, ".")
+                player_board[row][col] = 'O'
+       
 def print_scores():
     """
     Method to print user score
@@ -208,15 +215,18 @@ if __name__ == "__main__":
     SHIP_SIZES = 3
     board_sizes = {"1": 7, "2": 9, "3": 12}
     board_size = 0
+    comp_ships = []
+    player_ships = []
     while True:
         welcome()
         rules()
         difficulties = set_diff()
-
         board_size = board_sizes[difficulties]
+
         comp_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board, comp_board = ships(board_size, player_board, comp_board)
 
         game(board_size, comp_board, player_board)
         break
+
