@@ -203,6 +203,16 @@ def game(board_size: int, player_board, comp_board):
             else:
                 print("The computer missed at row", row, "column", col, ".")
                 player_board[row][col] = "M"
+            
+            if guess_row not in range(7) or guess_col not in range(7):
+                print("Oops, value is not in range")
+                print_board()
+            else:
+                comp_board[guess_row][guess_col] == "X" or \
+                comp_board[guess_row][guess_col] == "O"
+                print("You already fired here")
+                
+        
 
 
 def print_scores():
