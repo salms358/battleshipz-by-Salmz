@@ -152,11 +152,6 @@ def game(board_size: int, player_board, comp_board):
     while num_guesses > 0:
         # Print game boards
         print_board(player_board, comp_board)
-        num_guesses = 8
-        if num_guesses < 8:
-            if num_guesses == 8:
-                print("Too many incorrect guesses")
-                print("Turn: " + str(guess + 1))
 
         # Get user input
         try:
@@ -175,6 +170,7 @@ def game(board_size: int, player_board, comp_board):
             continue
         if comp_board[guess_row][guess_col] == "S":
             print("Hit!")
+            print(num_guesses)
             comp_board[guess_row][guess_col] = "X"
             num_hits += 1
             row = randint(0, len(player_board) - 1)
@@ -191,6 +187,10 @@ def game(board_size: int, player_board, comp_board):
             print("Miss!")
             comp_board[guess_row][guess_col] = "M"
             num_guesses -= 1
+            print(f"Guesses remaining:",{num_guesses})
+            if num_guesses == 0:
+                print("too many incorrect guesses game over")
+                break
            
             row = randint(0, len(player_board) - 1)
             col = randint(0, len(player_board) - 1)
@@ -203,14 +203,6 @@ def game(board_size: int, player_board, comp_board):
             else:
                 print("The computer missed at row", row, "column", col, ".")
                 player_board[row][col] = "M"
-            
-            if guess_row not in range(7) or guess_col not in range(7):
-                print("Oops, value is not in range")
-                print_board()
-            else:
-                comp_board[guess_row][guess_col] == "X" or \
-                comp_board[guess_row][guess_col] == "O"
-                print("You already fired here")
                 
         
 
@@ -240,6 +232,7 @@ if __name__ == "__main__":
     board_size = 0
     comp_ships = []
     player_ships = []
+    num_guesses = 5
     while True:
         welcome()
         rules()
@@ -251,6 +244,10 @@ if __name__ == "__main__":
         player_board, comp_board = ships(board_size, player_board, comp_board)
         game(board_size, comp_board, player_board)
         break
+
+
+
+
 
 
 
