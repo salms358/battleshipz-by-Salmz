@@ -86,21 +86,33 @@ def print_board(player_board, comp_board):
     for row in player_board:
         print(" ".join(row))
     print()
-
-    print("Computer board:")
-
     for row in comp_board:
-        print(" ".join(row))
-    print()  
+        print(" ".join(["O" if val == "S" else val for val in row]))
+    #print("Computer board:")
+    #for row in comp_board:
+        #print(" ".join(row))  
+    #print()
 
+def hiding():
+    for i in range(board_size):
+        row = []
+        for j in range(board_size):
+            row.append({"ship": False, "hit": False, "revealed": False})
+            comp_board.append(row)
 
 def ships(board_size: int, player_board, comp_board):
     """
     Place ships randomly
     """
+    hidden_ships = []
+    for i in range (NUMBER_SHIPS):
+        x = randint(0, board_size - 1)
+        y = randint(0, board_size - 1)
+        hidden_ships.append((x,y))
     for i in range(NUMBER_SHIPS):
         ship_row = randint(0, board_size - 1)
         ship_col = randint(0, board_size - 1)
+
 
         # Ensure the ship does not overlap with another ship
         while player_board[ship_row][ship_col] == "S":
@@ -145,7 +157,8 @@ def game(board_size: int, player_board, comp_board):
     num_hits = 0
     comp_hits = 0
     comp_misses = 0
-    comp_guess = 0
+    comp_guess = 5
+    
 
     # while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses and comp_hits < board_size ** 2:
     
@@ -171,7 +184,7 @@ def game(board_size: int, player_board, comp_board):
         if comp_board[guess_row][guess_col] == "S":
             print("Hit!")
             print(num_guesses)
-            comp_board[guess_row][guess_col] = "X"
+            comp_board[guess_row][guess_col] = True
             num_hits += 1
             row = randint(0, len(player_board) - 1)
             col = randint(0, len(player_board) - 1)
@@ -203,6 +216,11 @@ def game(board_size: int, player_board, comp_board):
             else:
                 print("The computer missed at row", row, "column", col, ".")
                 player_board[row][col] = "M"
+                comp_guess -= 1
+                print(f"Guesses remaining Computer:",{num_guesses})
+                if comp_guess == 0:
+                    print("Computer has too many incorrect guesses game over")
+                    break
                 
         
 
@@ -233,6 +251,7 @@ if __name__ == "__main__":
     comp_ships = []
     player_ships = []
     num_guesses = 5
+    hidden_ships = []
     while True:
         welcome()
         rules()
@@ -244,6 +263,8 @@ if __name__ == "__main__":
         player_board, comp_board = ships(board_size, player_board, comp_board)
         game(board_size, comp_board, player_board)
         break
+
+
 
 
 
