@@ -87,18 +87,11 @@ def print_board(player_board, comp_board):
         print(" ".join(row))
     print()
     for row in comp_board:
-        print(" ".join(["O" if val == "S" else val for val in row]))
+        print(" ".join(["O" if val == "S" else val for val in row]))  
     #print("Computer board:")
     #for row in comp_board:
         #print(" ".join(row))  
     #print()
-
-def hiding():
-    for i in range(board_size):
-        row = []
-        for j in range(board_size):
-            row.append({"ship": False, "hit": False, "revealed": False})
-            comp_board.append(row)
 
 def ships(board_size: int, player_board, comp_board):
     """
@@ -158,7 +151,7 @@ def game(board_size: int, player_board, comp_board):
     comp_hits = 0
     comp_misses = 0
     comp_guess = 5
-    
+    revealed = False
 
     # while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses and comp_hits < board_size ** 2:
     
@@ -182,9 +175,15 @@ def game(board_size: int, player_board, comp_board):
             print("Invalid input")
             continue
         if comp_board[guess_row][guess_col] == "S":
-            print("Hit!")
-            print(num_guesses)
-            comp_board[guess_row][guess_col] = True
+            for val in row:
+                if val == "S" and not revealed:
+                    print("S", end=" ")
+                    revealed = True
+                else:
+                    print(val, end=" ")
+                    print("Hit!")
+                    print(num_guesses)
+            comp_board[guess_row][guess_col] = "S"
             num_hits += 1
             row = randint(0, len(player_board) - 1)
             col = randint(0, len(player_board) - 1)
@@ -238,7 +237,8 @@ def print_scores():
         board_size[row_comp][col_comp] = "."
         comp_misses += 1
 
-    # End the game
+    # End the g4
+    # ame
 
 
 
@@ -263,6 +263,9 @@ if __name__ == "__main__":
         player_board, comp_board = ships(board_size, player_board, comp_board)
         game(board_size, comp_board, player_board)
         break
+
+
+
 
 
 
