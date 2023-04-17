@@ -56,7 +56,7 @@ here is a link to the validator score:
 - The grid size starts from 0 to 7 with the easy mode it always picks up the user input as one more than it is e.g 3,1 is 4,2
 - The computer always misses which i am concerned about im not sure why this was happening.
 - Sometimes the computer picks the same coordinates as before.
-
+- There is a problem with 
 
 # Deployment
 1. I used Heroku to deploy my final project to the cloud. To do this I had to:

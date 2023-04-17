@@ -55,10 +55,10 @@ def set_diff():
     print("1. easy")
     print("2. medium")
     print("3. hard")
-    difficulties = input("Enter desired difficulty: ")
+    difficulties = input("Enter desired difficulty:⧵n ")
     while difficulties not in ["1", "2", "3"]:
         print("Invalid input")
-        difficulties = input("Enter desired difficulty: ")
+        difficulties = input("Enter desired difficulty:⧵n")
     return difficulties
 
 
@@ -77,7 +77,7 @@ def dual_boards():
         row = ["O"] * board_size
         comp_board.append(row)
 
-    empty_board = []
+    hidden_battle_board = []
     for i in range(board_size):
         row = ["O"] * board_size
         board.append(row)
@@ -91,12 +91,11 @@ def print_board(player_board, comp_board):
     print("Player board:")
     for row in player_board:
         print(" ".join(row))
-    print()
-    for row in empty_board:
+    print("Computer board:")
+    for row in hidden_battle_board:
         print(" ".join(row))  
     print()
-#print(" ".join(["O" if val == "S" else val for val in row]))  
-    #print("Computer board:")
+
 
 
 def ships(board_size: int, player_board, comp_board):
@@ -106,7 +105,6 @@ def ships(board_size: int, player_board, comp_board):
     for i in range (NUMBER_SHIPS):
         x = randint(0, board_size - 1)
         y = randint(0, board_size - 1)
-        hidden_ships.append((x,y))
     for i in range(NUMBER_SHIPS):
         ship_row = randint(0, board_size - 1)
         ship_col = randint(0, board_size - 1)
@@ -133,7 +131,7 @@ def ships(board_size: int, player_board, comp_board):
     return player_board, comp_board
 
 
-def game(board_size: int, player_board, comp_board, empty_board):
+def game(board_size: int, player_board, comp_board, hidden_battle_board):
     """
     Gameplay loop method
     """
@@ -146,12 +144,12 @@ def game(board_size: int, player_board, comp_board, empty_board):
     
     while num_guesses > 0:
         # Print game boards
-        print_board(player_board, empty_board)
+        print_board(player_board, hidden_battle_board)
 
         # Get user input
         try:
-            guess_row = int(input("Guess row: "))
-            guess_col = int(input("Guess col: "))
+            guess_row = int(input("Guess row:⧵n ")) 
+            guess_col = int(input("Guess col:⧵n ")) 
             if guess_row <= board_size and guess_row > 0:
                 pass
             else:
@@ -165,17 +163,10 @@ def game(board_size: int, player_board, comp_board, empty_board):
             continue
         if comp_board[guess_row][guess_col] == "S":
             print("Hit!")
-            
-
-
             print(num_guesses)
-            #for val in row:
-                #if val == "S" and not revealed:
-                   # print("S", end=" ")
-                   # revealed = True
-                #else:
+            
                     
-            empty_board[guess_row][guess_col] = "S"
+            hidden_battle_board[guess_row][guess_col] = "S"
             num_hits += 1
             if num_hits == 5:
                 print("You won")
@@ -195,7 +186,7 @@ def game(board_size: int, player_board, comp_board, empty_board):
                 player_board[row][col] = "M"
         else:
             print("Miss!")
-            empty_board[guess_row][guess_col] = "M"
+            hidden_battle_board[guess_row][guess_col] = "M"
             num_guesses -= 1
             print(f"Guesses remaining:",{num_guesses})
             if num_guesses == 0:
@@ -248,7 +239,6 @@ if __name__ == "__main__":
     comp_ships = []
     player_ships = []
     num_guesses = 5
-    hidden_ships = []
     while True:
         welcome()
         rules()
@@ -256,10 +246,10 @@ if __name__ == "__main__":
         board_size = board_sizes[difficulties]
         # hidden_comp_board = 
         comp_board = [["O" for x in range(board_size)] for y in range(board_size)]
-        empty_board = [["O" for x in range(board_size)] for y in range(board_size)]
+        hidden_battle_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board, comp_board = ships(board_size, player_board, comp_board)
-        game(board_size, comp_board, player_board, empty_board)
+        game(board_size, comp_board, player_board, hidden_battle_board)
         break
 
 
