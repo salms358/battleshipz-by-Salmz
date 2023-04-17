@@ -133,19 +133,6 @@ def ships(board_size: int, player_board, comp_board):
     return player_board, comp_board
 
 
-# Computers turn
-def computer_guess(player_board):
-    global board_size
-    while True:
-        guess_row = randint(0, board_size - 1)
-        guess_col = randint(0, board_size - 1)
-        # See if the computer guessed these positions before,
-        # if not then it can try out these positions
-        if [guess_row, guess_col] not in comp_guess:
-            break
-    comp_guesses.append([guess_row, guess_col])
-
-
 def game(board_size: int, player_board, comp_board, empty_board):
     """
     Gameplay loop method
@@ -156,9 +143,6 @@ def game(board_size: int, player_board, comp_board, empty_board):
     comp_hits = 0
     comp_misses = 0
     comp_guess = 20
-    revealed = False
-
-    # while num_hits < SHIP_SIZES * NUMBER_SHIPS and num_guesses and comp_hits < board_size ** 2:
     
     while num_guesses > 0:
         # Print game boards
@@ -181,6 +165,9 @@ def game(board_size: int, player_board, comp_board, empty_board):
             continue
         if comp_board[guess_row][guess_col] == "S":
             print("Hit!")
+            
+
+
             print(num_guesses)
             #for val in row:
                 #if val == "S" and not revealed:
@@ -190,6 +177,9 @@ def game(board_size: int, player_board, comp_board, empty_board):
                     
             empty_board[guess_row][guess_col] = "S"
             num_hits += 1
+            if num_hits == 5:
+                print("You won")
+                break
             row = randint(0, len(player_board) - 1)
             col = randint(0, len(player_board) - 1)
 
@@ -197,6 +187,9 @@ def game(board_size: int, player_board, comp_board, empty_board):
                 print("The computer hit your ship at row", row, "column", col, "!")
                 player_board[row][col] = "H"
                 comp_hits += 1
+                if comp_hits == 5:
+                    print("computer won")
+                    break
             else:
                 print("The computer missed at row", row, "column", col, ".")
                 player_board[row][col] = "M"
@@ -242,8 +235,7 @@ def print_scores():
         board_size[row_comp][col_comp] = "."
         comp_misses += 1
 
-    # End the g4
-    # ame
+    # End the game
 
 
 
@@ -252,7 +244,7 @@ if __name__ == "__main__":
     NUMBER_SHIPS = 5
     SHIP_SIZES = 3
     board_sizes = {"1": 7, "2": 9, "3": 12}
-    board_size = 0
+    board_size = 1
     comp_ships = []
     player_ships = []
     num_guesses = 5
