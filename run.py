@@ -150,16 +150,8 @@ def game(board_size: int, player_board, comp_board, hidden_battle_board):
         try:
             guess_row = int(input("Guess row:⧵n ")) 
             guess_col = int(input("Guess col:⧵n ")) 
-            if guess_row <= board_size and guess_row > 0:
-                pass
-            else:
-                raise "Number is out of bounds"
-            if guess_col <= board_size and guess_col > 0:
-                pass
-            else:
-                raise "Number is out of bounds"
         except ValueError:
-            print("Invalid input")
+            print("Invalid input please enter in integer")
             continue
         if comp_board[guess_row][guess_col] == "S":
             print("Hit!")
