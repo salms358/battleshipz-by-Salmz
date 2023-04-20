@@ -141,8 +141,8 @@ def game(board_size: int, player_board, comp_board, empty_board):
         print_board(player_board, empty_board)
         # Get user input
         try:
-            guess_row = int(input("Guess row: "))
-            guess_col = int(input("Guess col: "))
+            guess_row = int(input("Guess row: ")) - 1
+            guess_col = int(input("Guess col: ")) - 1
         except ValueError:
             print("Invalid input please enter in an integer")
             continue
@@ -197,7 +197,7 @@ def game(board_size: int, player_board, comp_board, empty_board):
                 print("you guessed the same coordinates mate")
             
             if player_board[guess_col][guess_row] == "M" or \
-                player_board[guess_row][guess_col] == "H"
+                player_board[guess_row][guess_col] == "H":
                 print("Computer sort yourself out you guessed the same coordinates")
 
             
