@@ -77,6 +77,7 @@ def print_board(player_board, comp_board):
     for row in player_board:
         print(" ".join(row))
     print()
+    print("Computer board:")
     for row in empty_board:
         print(" ".join(row))  
     print()
