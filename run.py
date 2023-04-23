@@ -215,9 +215,7 @@ def print_scores():
         board_size[row_comp][col_comp] = "."
         comp_misses += 1
 
-    # End the g4
-    # ame
-    # End the game
+    
 
 
 
@@ -237,7 +235,7 @@ if __name__ == "__main__":
         rules()
         difficulties = set_diff()
         board_size = board_sizes[difficulties]
-        # hidden_comp_board = 
+       
         comp_board = [["O" for x in range(board_size)] for y in range(board_size)]
         empty_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board = [["O" for x in range(board_size)] for y in range(board_size)]

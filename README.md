@@ -21,6 +21,8 @@ Frequent time user:
 - I enjoy playing the game but sometimes i wish the columns were not so squished together.
 
 # Structure
+## The flow of the game:
+![Rules of game](https://raw.githubusercontent.com/salms358/battleshipz-by-Salmz/main/rules%20and%20homepage.jpg)
 
 # How to play
 Battleship is a 2 player game and involves playing against a computer. The user should enter in a value between 0-7 if they chose the easy mode, 0-10 if they choose the medium mode and 0-12 if they choose the hard modes. If the user enter in too many incorrect guesses the game will end. Moreover if the user sinks all the battleships the user will win the game. Once the user guesses their row and column the computer will respond with their guess and it should state if the hit or miss their guess.
