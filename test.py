@@ -1,4 +1,5 @@
 from random import randint
+
 random_number = randint(0, 10)
 # Should print out ASCII art as a welcome page
 def welcome():
@@ -16,6 +17,8 @@ def welcome():
                """
     )
     print("Welcome to the battleships game! :)")
+
+
 # If the user wants to see the rules incase its their first time or theyneed
 # a reminder they can ask for the rules to be printed onto the console
 def rules():
@@ -41,6 +44,8 @@ def rules():
         print()
     print("lets gooooooooooo!")
     print()
+
+
 def set_diff():
     """setting difficulty"""
     print("Select your difficulty level")
@@ -52,6 +57,8 @@ def set_diff():
         print("Invalid input")
         difficulties = input("Enter desired difficulty: ")
     return difficulties
+
+
 def dual_boards():
     """
     This should lead to both board printing at the same time
@@ -69,6 +76,8 @@ def dual_boards():
     for i in range(board_size):
         row = ["O"] * board_size
         board.append(row)
+
+
 def print_board(player_board, comp_board):
     """
     printing both boards together
@@ -79,17 +88,18 @@ def print_board(player_board, comp_board):
     print()
     print("Computer board:")
     for row in empty_board:
-        print(" ".join(row))  
+        print(" ".join(row))
     print()
+
 
 def ships(board_size: int, player_board, comp_board):
     """
     Place ships randomly
     """
-    for i in range (NUMBER_SHIPS):
+    for i in range(NUMBER_SHIPS):
         x = randint(0, board_size - 1)
         y = randint(0, board_size - 1)
-        hidden_ships.append((x,y))
+        hidden_ships.append((x, y))
     for i in range(NUMBER_SHIPS):
         ship_row = randint(0, board_size - 1)
         ship_col = randint(0, board_size - 1)
@@ -132,79 +142,61 @@ def game(board_size: int, player_board, comp_board, empty_board):
     comp_hits = 0
     comp_misses = 0
     comp_guess = 20
-    revealed = False
-
 
     while num_guesses > 0:
         # Print game boards
         print_board(player_board, empty_board)
         # Get user input
-        #some source code i got from the other battleships game linked so i can get idea of how i can get user to input their guesses
-        try:
-            guess_row = int(input("Guess row: ")) - 1
-            guess_col = int(input("Guess col: ")) - 1
-        except ValueError:
-            print("Invalid input please enter in an integer")
-            continue
-        if empty_board[guess_row][guess_col] == "M" or \
-            empty_board[guess_row][guess_col] == "S":
-            num_guesses += 0
-            print("you guessed the same coordinates mate")
+        try:   
         
-        if player_board[guess_col][guess_row] == "M" or \
-            player_board[guess_row][guess_col] == "H":
-            print("Computer sort yourself out you guessed the same coordinates")
-
-         #if user hits ship
-
-        if empty_board[guess_row][guess_col] == "S":
-            print("Hit!")
-            num_hits += 1
-            print(f"Player points:",{num_hits})
-            print(num_guesses)
-        else:
-            #if user misses ship
-            empty_board[guess_row][guess_col] = "M"
-            print("Miss!")
+            if empty_board[guess_col][guess_row] == "H" or "M":
+                print("Please enter in different coordinates")
+            if: 
+            empty_board[guess_col][guess_row] == "S"
+            empty_board[guess_col][guess_row] == "H"
             num_guesses -= 1
-            print(f"Guesses remaining:",{num_guesses})
-        
-    
-         #ends the game if the user sinks all computers ships
-            if num_hits == 5:
-                print("You won")
+            else:
+                empty_board[guess_col][guess_row] == "M":
+                print(f"Guesses remaining:", {num_guesses})
+                num_guesses -= 1
+
+            if num_guesses == 0:
+                print("too many incorrect guesses game over")
                 break
-            #computers go if they hit ship or miss
+            if comp_guess == 0:
+                print("Computer has too many incorrect guesses game over")
+                break
             row = randint(0, len(player_board) - 1)
             col = randint(0, len(player_board) - 1)
- 
-        if player_board[row][col] == "S":
-            print("The computer hit your ship at row", row, "column", col, "!")
-            player_board[row][col] = "H"
-            comp_hits += 1
-            print(f"Computers score:",{comp_hits})
-                
-        else:
-            print("The computer missed at row", row, "column", col, ".")
-            player_board[row][col] = "M"
-            print(f"Guesses remaining:",{comp_guesses})
-           #if computer sinks all of users ships
-        if comp_hits == 5:
-            print("computer won")
-            break
+            if player_board[row][col] == "S":
+                player_board[row][col] = "H"
+                print("The computer hit your ship at row", row, "column", col, "!")
+                comp_hits += 1
+                if comp_hits == 5:
+                    print("computer won")
+                    break
+            else:
+                print("The computer missed at row", row, "column", col, ".")
+                player_board[row][col] = "M"
 
-        if num_guesses == 0:
-            print("too many incorrect guesses game over")
-            break
-        
-        if comp_guess == 0:
-            print("Computer has too many incorrect guesses game over")
-            break
-       
+
+def print_scores():
+    """
+    Method to print user score
+    """
+    if (row_comp, col_comp) in comp_ship_placement:
+        print("The computer hit your ship!")
+        board_size[row_comp][col_comp] = "X"
+        num_hits -= 1
+    else:
+        print("The computer missed your ship lucky!")
+        board_size[row_comp][col_comp] = "."
+        comp_misses += 1
+
+
 if __name__ == "__main__":
     # Set up game constants
     NUMBER_SHIPS = 5
-    SHIP_SIZES = 3
     board_sizes = {"1": 7, "2": 9, "3": 12}
     board_size = 0
     board_size = 1
@@ -217,12 +209,10 @@ if __name__ == "__main__":
         rules()
         difficulties = set_diff()
         board_size = board_sizes[difficulties]
-       #idea from the linked battleships game
+
         comp_board = [["O" for x in range(board_size)] for y in range(board_size)]
         empty_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board = [["O" for x in range(board_size)] for y in range(board_size)]
         player_board, comp_board = ships(board_size, player_board, comp_board)
         game(board_size, comp_board, player_board, empty_board)
         break
-
-
