@@ -5,7 +5,7 @@
 Welcome to my Battleships game. Its a very basic variation of the classic Battleships game. 
 The aim of the game is to sink of the computers ships.
 
-A live version of the game can be found here []
+A live version of the game can be found here [https://battleships-by-salmz.herokuapp.com/]
 
 
 # Strategy 
