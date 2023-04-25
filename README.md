@@ -56,6 +56,9 @@ if the user chooses the medium mode this is the grid they will be presented with
 
 if the user chooses the hard mode this is the grid they will be presented with.
 
+![score board](https://user-images.githubusercontent.com/119611403/234418459-bbdf621d-9031-485d-9b1a-c3dd0212922e.jpg)
+
+Once the user enters theire guess the terminal will state if the user hits or misses the ship and the outcome of the computers go. 
 
 # How to play
 Battleship is a 2 player game and involves playing against a computer. The user should enter in a value between 0-7 if they chose the easy mode, 0-10 if they choose the medium mode and 0-12 if they choose the hard modes. If the user enter in too many incorrect guesses the game will end. Moreover if the user sinks all the battleships the user will win the game. Once the user guesses their row and column the computer will respond with their guess and it should state if the hit or miss their guess.
@@ -70,6 +73,9 @@ Battleship is a 2 player game and involves playing against a computer. The user 
 # Testing
 - To test i purposely entered in incorrect values so i can get error messages from the programme to be printed out.
 - I put the code into pep8 validator then corrected errors from there. When re doing the pep 8 validator it got 68% with most of the problems to do with white spaces. The pep8 also said it was around 68% correct due to these white space problems.
+- I added some validation to the code where the user can only enter in integers when guessing 
+- And when user picks difficulty the user can only pick 1,2 or 3 
+- I added mild validation which states if the user enters in the same coordinate as before this is the same for the computer. But the number of guesses still decrease as mentioned in the known bugs section.
 
 ![errors](https://user-images.githubusercontent.com/119611403/234338163-6f3b5a4d-8c89-48fd-9be6-8e685819cf0e.jpg)
 
@@ -84,6 +90,7 @@ Battleship is a 2 player game and involves playing against a computer. The user 
 ## Unsolved bugs 
 - The computers grid involves starting from 0 as when the computer makes a guess it will be one more than it is just like how the empty_board was previously
 - When the user guesses the same coordinate it will state that they have entered in the same coordinate but the number of guesses will still decrease. 
+- There is no validation for out of bounds guesses just an error message that says out of bounds
 
 # Deployment
 1. I used Heroku to deploy my final project to the cloud. To do this I had to:

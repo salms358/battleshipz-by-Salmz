@@ -187,7 +187,8 @@ def game(board_size: int, player_board, comp_board, empty_board):
         else:
             print("The computer missed at row", row, "column", col, ".")
             player_board[row][col] = "M"
-            print(f"Guesses remaining:",{comp_guesses})
+            comp_guess -= 1
+            print(f"Guesses remaining:",{comp_guess})
            #if computer sinks all of users ships
         if comp_hits == 5:
             print("computer won")
