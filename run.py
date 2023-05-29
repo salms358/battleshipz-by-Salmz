@@ -79,7 +79,6 @@ def ships(board_size: int, player_board, comp_board):
     """
     Place ships randomly
     """
-    NUMBER_SHIPS = 5
     for i in range (NUMBER_SHIPS):
         x = randint(0, board_size - 1)
         y = randint(0, board_size - 1)
@@ -125,7 +124,7 @@ def game(board_size: int, player_board, comp_board, empty_board):
     num_hits = 0
     comp_hits = 0
     comp_guess = 20
-    revealed = False
+    revealed = True
 
     while num_guesses > 0:
         # Print game boards
@@ -148,7 +147,6 @@ def game(board_size: int, player_board, comp_board, empty_board):
 
         # Check if user hits a ship
         if comp_board[guess_row][guess_col] == "S":
-            #empty_board[guess_row][guess_col] == ""
             if empty_board[guess_row][guess_col] == "H" or empty_board[guess_row][guess_col] == "M":
                 print("You've already hit that location.")
             else:
@@ -165,20 +163,20 @@ def game(board_size: int, player_board, comp_board, empty_board):
 
         # End the game if the user sinks all computer's ships
         if num_hits == 5:
-            print("You won")
+            print("You won")        
             break
 
         # Computer's turn
         comp_row = randint(0, board_size - 1)
         comp_col = randint(0, board_size - 1)
-        
+
         if player_board[comp_row][comp_col] == "S":
             print("The computer hit your ship at row", comp_row + 1, "column", comp_col + 1, "!")
             player_board[comp_row][comp_col] = "H"
             comp_hits += 1
             print("Computer's score:", comp_hits)
         else:
-            player_board[comp_row][comp_col] = "M"  # Corrected assignment operator
+            player_board[comp_row][comp_col] = "M"
             print("The computer missed at row", comp_row + 1, "column", comp_col + 1, ".")
 
         # If computer sinks all of user's ships
@@ -215,6 +213,7 @@ if __name__ == "__main__":
         play_again = input("Do you want to play again? (y/n): ")
         if play_again.lower() != "y":
             break
+
 
 
 
