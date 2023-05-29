@@ -99,9 +99,11 @@ def ships(board_size: int, player_board, comp_board):
             ship_row = randint(0, board_size - 1)
             ship_col = randint(0, board_size - 1)
         comp_board[ship_row][ship_col] = "S"
+    for i in range(NUMBER_SHIPS):
+        ship_row = randint(0, board_size - 1)
+        ship_col = randint(0, board_size - 1)
+
     return player_board, comp_board
-
-
 
 
 def computer_guess(player_board, comp_guess):
@@ -161,11 +163,6 @@ def game(board_size: int, player_board, comp_board, empty_board):
             num_guesses -= 1
             print("Guesses remaining:", num_guesses)
 
-        # End the game if the user sinks all computer's ships
-        if num_hits == 5:
-            print("You won")        
-            break
-
         # Computer's turn
         comp_row = randint(0, board_size - 1)
         comp_col = randint(0, board_size - 1)
@@ -182,16 +179,24 @@ def game(board_size: int, player_board, comp_board, empty_board):
         # If computer sinks all of user's ships
         if comp_hits == 5:
             print("Computer won")
+            print_board(player_board, empty_board)
             break
 
         if num_guesses == 0:
             print("Too many incorrect guesses. Game over")
+            print_board(player_board, empty_board)
             break
 
         if comp_guess == 0:
             print("Computer has too many incorrect guesses. Game over")
+            print_board(player_board, empty_board)
             break
 
+        # End the game if the user sinks all computer's ships
+        if num_hits == 5:
+            print("You won")
+            print_board(player_board, empty_board)
+            break
 
 if __name__ == "__main__":
     # Set up game constants
