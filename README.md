@@ -92,10 +92,11 @@ Battleship is a 2 player game and involves playing against a computer. The user 
 - Initially the ships on the computer board were not concealing which defeats the purpose of the game the code was present but not working so this code had to be removed and a third bored had to be added to replace the computer board when the player hit or miss. 
 - The grid size starts from 0 to 7 with the easy mode it always picks up the user input as one more than it is e.g 3,1 is 4,2
 - The computer always misses which i am concerned about im not sure why this was happening.
-## Unsolved bugs 
 - The computers grid involves starting from 0 as when the computer makes a guess it will be one more than it is just like how the empty_board was previously
-- When the user guesses the same coordinate it will state that they have entered in the same coordinate but the number of guesses will still decrease. 
-- There is no validation for out of bounds guesses just an error message that says out of bounds
+- When the user guesses the same coordinate it will state that they have entered in the same coordinate but the number of guesses will still decrease.
+- There is no validation for out of bounds guesses just an error message that says out of bounds. The report mentioned that when a number out of bounds was bought up the program accepted it and crashed this is not the case now as I made sure that the program states that the guess is out of bounds. The program will not crash anymore either.
+## Unsolved bugs  
+- Sometimes there are 4 ships on the computers board 
 
 # Deployment
 1. I used Heroku to deploy my final project to the cloud. To do this I had to:

@@ -17,6 +17,9 @@ def welcome():
     )
     print("Welcome to the battleships game! :)")
 
+# The rules are shown and validation present
+# The validation used was taken from the code i linked
+
 
 def rules():
     """Method to show the rules"""
@@ -36,12 +39,13 @@ def rules():
         print("opponent's board with a marker to indicate a hit.")
         print("If the guess is a miss, the player marks that location with a")
         print("marker to indicate a miss.")
-        print
-        ("The game continues until all ships of one player have been sunk")
-        print("and the other player is declared the winner.")
+        print("All of opponents ships must be sunk")
+        print("Whoever sinks all ships first wins")
         print()
     print("Let's gooooooooooo!")
     print()
+
+# Allows the user to choose the difficulty
 
 
 def set_difficulty():
@@ -67,6 +71,8 @@ def dual_boards(board_size):
     empty_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
     return player_board, comp_board, empty_board
 
+# Prints both boards together
+
 
 def print_board(player_board, empty_board):
     """
@@ -80,6 +86,8 @@ def print_board(player_board, empty_board):
     for row in empty_board:
         print(" ".join(row))
     print()
+
+# Allows the ships to be randomly placed on the boards
 
 
 def ships(board_size: int, player_board, comp_board):
@@ -124,16 +132,18 @@ def computer_guess(player_board, comp_guess):
             break
     comp_guess.append([guess_row, guess_col])
 
+# The game loop allowing the user to play the game
+
 
 def game(board_size: int, player_board, comp_board, empty_board):
     """
     Gameplay loop method
     """
     # Play the game
-    num_guesses = 49
+    num_guesses = 24
     num_hits = 0
     comp_hits = 0
-    comp_guess = 20
+    comp_guess = 24
 
     while num_guesses > 0:
         # Print game boards
@@ -150,7 +160,7 @@ def game(board_size: int, player_board, comp_board, empty_board):
                 guess_col < 0 or guess_col >= board_size:
             print("Invalid coordinate. Please enter a valid coordinate.")
             continue
-
+        # Users turn
         if empty_board[guess_row][guess_col] == "M" or \
                 empty_board[guess_row][guess_col] == "S":
             print("You guessed the same coordinates before.")
@@ -187,7 +197,7 @@ def game(board_size: int, player_board, comp_board, empty_board):
             player_board[comp_row][comp_col] = "M"
             print("The computer missed your ship at row", comp_row + 1,
                   "col", comp_col + 1)
-
+        # ending the game
         if comp_hits == 5:
             print("Computer won")
             print_board(player_board, empty_board)
@@ -216,7 +226,7 @@ if __name__ == "__main__":
     SHIP_SIZES = 3
     board_sizes = {"1": 7, "2": 9, "3": 12}
     board_size = 0
-    
+# Calling necessaery functions and validation for playing the game again
 board_sizes = {"1": 7, "2": 9, "3": 12}
 while True:
     welcome()
@@ -225,7 +235,8 @@ while True:
     board_size = board_sizes[difficulties]
     comp_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
     empty_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
-    player_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
+    player_board = [
+        ["O" for _ in range(board_size)] for _ in range(board_size)]
     player_board, comp_board = ships(board_size, player_board, comp_board)
     game(board_size, player_board, comp_board, empty_board)
     play_again = input("Do you want to play again? (y/n): ")
@@ -234,4 +245,3 @@ while True:
         play_again = input("Do you want to play again? (y/n): ")
     if play_again.lower() == "n":
         break
-
