@@ -1,5 +1,6 @@
 from random import randint
 
+
 def welcome():
     """Ascii art of ship"""
     print(
@@ -15,6 +16,7 @@ def welcome():
                """
     )
     print("Welcome to the battleships game! :)")
+
 
 def rules():
     """Method to show the rules"""
@@ -34,11 +36,13 @@ def rules():
         print("opponent's board with a marker to indicate a hit.")
         print("If the guess is a miss, the player marks that location with a")
         print("marker to indicate a miss.")
-        print("The game continues until all ships of one player have been sunk")
+        print
+        ("The game continues until all ships of one player have been sunk")
         print("and the other player is declared the winner.")
         print()
     print("Let's gooooooooooo!")
     print()
+
 
 def set_difficulty():
     """Setting difficulty"""
@@ -52,14 +56,17 @@ def set_difficulty():
         difficulties = input("Enter desired difficulty: ")
     return difficulties
 
+
 def dual_boards(board_size):
     """
     This should lead to both board printing at the same time
     """
-    player_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
+    player_board = [
+        ["O" for _ in range(board_size)] for _ in range(board_size)]
     comp_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
     empty_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
     return player_board, comp_board, empty_board
+
 
 def print_board(player_board, empty_board):
     """
@@ -79,10 +86,10 @@ def ships(board_size: int, player_board, comp_board):
     """
     Place ships randomly
     """
-    for i in range (NUMBER_SHIPS):
+    for i in range(NUMBER_SHIPS):
         x = randint(0, board_size - 1)
         y = randint(0, board_size - 1)
-        comp_board.append((x,y))
+        comp_board.append((x, y))
     for i in range(NUMBER_SHIPS):
         ship_row = randint(0, board_size - 1)
         ship_col = randint(0, board_size - 1)
@@ -117,6 +124,7 @@ def computer_guess(player_board, comp_guess):
             break
     comp_guess.append([guess_row, guess_col])
 
+
 def game(board_size: int, player_board, comp_board, empty_board):
     """
     Gameplay loop method
@@ -126,7 +134,6 @@ def game(board_size: int, player_board, comp_board, empty_board):
     num_hits = 0
     comp_hits = 0
     comp_guess = 20
-    revealed = True
 
     while num_guesses > 0:
         # Print game boards
@@ -139,17 +146,20 @@ def game(board_size: int, player_board, comp_board, empty_board):
             print("Invalid input please enter an integer")
             continue
 
-        if guess_row < 0 or guess_row >= board_size or guess_col < 0 or guess_col >= board_size:
+        if guess_row < 0 or guess_row >= board_size or \
+                guess_col < 0 or guess_col >= board_size:
             print("Invalid coordinate. Please enter a valid coordinate.")
             continue
 
-        if empty_board[guess_row][guess_col] == "M" or empty_board[guess_row][guess_col] == "S":
+        if empty_board[guess_row][guess_col] == "M" or \
+                empty_board[guess_row][guess_col] == "S":
             print("You guessed the same coordinates before.")
             continue
 
         # Check if user hits a ship
         if comp_board[guess_row][guess_col] == "S":
-            if empty_board[guess_row][guess_col] == "H" or empty_board[guess_row][guess_col] == "M":
+            if empty_board[guess_row][guess_col] == "H" or \
+                    empty_board[guess_row][guess_col] == "M":
                 print("You've already hit that location.")
             else:
                 print("Hit!")
@@ -168,15 +178,16 @@ def game(board_size: int, player_board, comp_board, empty_board):
         comp_col = randint(0, board_size - 1)
 
         if player_board[comp_row][comp_col] == "S":
-            print("The computer hit your ship at row", comp_row + 1, "column", comp_col + 1, "!")
-            player_board[comp_row][comp_col] = "H"
+            print("The computer hit your ship at row", comp_row + 1,
+                  "col", comp_col + 1)
+            player_board[comp_row][comp_col] = "X"
             comp_hits += 1
-            print("Computer's score:", comp_hits)
+            print("Computer score:", comp_hits)
         else:
             player_board[comp_row][comp_col] = "M"
-            print("The computer missed at row", comp_row + 1, "column", comp_col + 1, ".")
+            print("The computer missed your ship at row", comp_row + 1,
+                  "col", comp_col + 1)
 
-        # If computer sinks all of user's ships
         if comp_hits == 5:
             print("Computer won")
             print_board(player_board, empty_board)
@@ -198,27 +209,29 @@ def game(board_size: int, player_board, comp_board, empty_board):
             print_board(player_board, empty_board)
             break
 
+
 if __name__ == "__main__":
     # Set up game constants
     NUMBER_SHIPS = 5
     SHIP_SIZES = 3
     board_sizes = {"1": 7, "2": 9, "3": 12}
     board_size = 0
-
-    while True:
-        welcome()
-        rules()
-        difficulties = set_difficulty()
-        board_size = board_sizes[difficulties]
-        comp_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
-        empty_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
-        player_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
-        player_board, comp_board = ships(board_size, player_board, comp_board)
-        game(board_size, player_board, comp_board, empty_board)
+    
+board_sizes = {"1": 7, "2": 9, "3": 12}
+while True:
+    welcome()
+    rules()
+    difficulties = set_difficulty()
+    board_size = board_sizes[difficulties]
+    comp_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
+    empty_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
+    player_board = [["O" for _ in range(board_size)] for _ in range(board_size)]
+    player_board, comp_board = ships(board_size, player_board, comp_board)
+    game(board_size, player_board, comp_board, empty_board)
+    play_again = input("Do you want to play again? (y/n): ")
+    while play_again.lower() not in ["y", "n"]:
+        print("Invalid input")
         play_again = input("Do you want to play again? (y/n): ")
-        if play_again.lower() != "y":
-            break
-
-
-
+    if play_again.lower() == "n":
+        break
 

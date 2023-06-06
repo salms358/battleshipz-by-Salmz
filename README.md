@@ -76,9 +76,14 @@ Battleship is a 2 player game and involves playing against a computer. The user 
 - I added some validation to the code where the user can only enter in integers when guessing 
 - And when user picks difficulty the user can only pick 1,2 or 3 
 - I added mild validation which states if the user enters in the same coordinate as before this is the same for the computer. But the number of guesses still decrease as mentioned in the known bugs section.
+- After getting the assessment back I added my code to the correct validator instead of PEP8. The pyLinter helped me identify the lines of code identified by the assessors that i needed to improve on. Alot of these errors comprised of the lines being too long and 2 lines not being where functions are classes are. 
+- This is how my code looked like as soon as i placed it in the PyLinter. As you can see there are a lot of errors that I hadnt corrected making my code look a little messy and unorganised.
+![Web capture_6-6-2023_1025_pep8ci herokuapp com](https://github.com/salms358/battleshipz-by-Salmz/assets/119611403/ad55023b-05f9-451b-b8a6-150cb5a84690)
+- After correcting these errors and retesting my code using the PyLinter again until there were no more errors left. 
+![Web capture_6-6-2023_10147_pep8ci herokuapp com](https://github.com/salms358/battleshipz-by-Salmz/assets/119611403/16a7e3e9-042c-4071-a1de-0b8d51a12ef8)
 
 ![errors](https://user-images.githubusercontent.com/119611403/234338163-6f3b5a4d-8c89-48fd-9be6-8e685819cf0e.jpg)
-
+- After cleaning up my code it looks a lot more efficient making it easier to read.
 
 - Print statements were used across the programme to make sure the code was running as it should be. Then these placeholder print statements were removed.
 
