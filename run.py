@@ -186,7 +186,7 @@ def game(board_size: int, player_board, comp_board, empty_board):
         # Computer's turn
         comp_row = randint(0, board_size - 1)
         comp_col = randint(0, board_size - 1)
-
+        # Inspiration from the linked project
         if player_board[comp_row][comp_col] == "S":
             print("The computer hit your ship at row", comp_row + 1,
                   "col", comp_col + 1)
